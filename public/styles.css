@@ -53,7 +53,24 @@ textarea {
 .brand {
   display: grid;
   justify-items: center;
+  align-items: center;
+  gap: 8px;
   line-height: 1;
+}
+
+.brand-logo {
+  height: clamp(50px, 7vw, 70px);
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brand:hover .brand-logo {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
 .brand-script {
@@ -582,3 +599,67 @@ h3 {
     column-count: 1;
   }
 }
+
+.social-section {
+  margin-top: 36px;
+  padding: 24px 28px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.social-section h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.social-section p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 10px 22px;
+  background: #111111;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  border-radius: 30px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.social-icon,
+.social-link svg,
+.social-card svg {
+  width: 18px !important;
+  height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor;
+}
+
