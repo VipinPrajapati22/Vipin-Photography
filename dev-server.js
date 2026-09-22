@@ -48,7 +48,7 @@ const server = http.createServer(async (request, response) => {
     const resolvedFile = stats.isDirectory() ? path.join(filePath, "index.html") : filePath;
     const extension = path.extname(resolvedFile).toLowerCase();
     response.writeHead(200, {
-      "Cache-Control": extension === ".html" || extension === ".js" ? "no-store" : "public, max-age=3600",
+      "Cache-Control": "no-store, no-cache, must-revalidate",
       "Content-Type": MIME_TYPES[extension] || "application/octet-stream",
     });
     fs.createReadStream(resolvedFile).pipe(response);

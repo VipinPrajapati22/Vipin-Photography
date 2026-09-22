@@ -10,17 +10,22 @@ from urllib.parse import quote, unquote, urlparse
 
 
 ROOT = Path(__file__).resolve().parent
+PUBLIC_ASSETS = ROOT / "public" / "assets"
 GALLERIES = {
-    "landscape": ROOT / "assets" / "landscape",
-    "woodland": ROOT / "assets" / "woodland",
-    "nature-macro": ROOT / "assets" / "nature-macro",
-    "other-projects": ROOT / "assets" / "other-projects",
+    "home": PUBLIC_ASSETS / "home",
+    "landscape": PUBLIC_ASSETS / "landscape",
+    "woodland": PUBLIC_ASSETS / "woodland",
+    "nature-macro": PUBLIC_ASSETS / "nature-macro",
+    "other-projects": PUBLIC_ASSETS / "other-projects",
 }
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
 IGNORED_FILES = {"wetland.jpg"}
 
 
 class PortfolioHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(ROOT / "public"), **kwargs)
+
     def end_headers(self) -> None:
         # Local development should always reflect the current HTML and JavaScript.
         self.send_header("Cache-Control", "no-store")
@@ -36,7 +41,16 @@ class PortfolioHandler(SimpleHTTPRequestHandler):
     def send_gallery(self, gallery_name: str) -> None:
         gallery_name = unquote(gallery_name)
         if gallery_name == "home":
-            directories = GALLERIES.values()
+            home_dir = GALLERIES["home"]
+            if home_dir.exists() and any(f.is_file() and f.suffix.lower() in IMAGE_EXTENSIONS for f in home_dir.iterdir()):
+                directories = [home_dir]
+            else:
+                directories = [
+                    GALLERIES["landscape"],
+                    GALLERIES["woodland"],
+                    GALLERIES["nature-macro"],
+                    GALLERIES["other-projects"],
+                ]
         elif gallery_name in GALLERIES:
             directories = [GALLERIES[gallery_name]]
         else:
