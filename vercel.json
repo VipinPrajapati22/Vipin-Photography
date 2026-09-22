@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "other",
+  "outputDirectory": "public",
+  "devCommand": "npm run dev",
+  "functions": {
+    "api/gallery/[gallery].js": {
+      "includeFiles": "public/assets/**"
+    }
+  }
+}

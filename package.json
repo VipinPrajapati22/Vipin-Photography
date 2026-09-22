@@ -1,0 +1,14 @@
+{
+  "name": "macro-vipin-photography",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A dynamic photography portfolio ready for Vercel.",
+  "scripts": {
+    "dev": "node dev-server.js",
+    "start": "node dev-server.js",
+    "build": "node -e \"console.log('Static site is ready for Vercel.')\""
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
