@@ -4,11 +4,15 @@
   "private": true,
   "description": "A dynamic photography portfolio ready for Vercel.",
   "scripts": {
-    "dev": "node dev-server.js",
-    "start": "node dev-server.js",
-    "build": "node -e \"console.log('Static site is ready for Vercel.')\""
+    "dev":    "node dev-server.js",
+    "start":  "node dev-server.js",
+    "thumbs": "node generate-thumbs.js",
+    "build":  "node -e \"console.log('Static site is ready for Vercel.')\""
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

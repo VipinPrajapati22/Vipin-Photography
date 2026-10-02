@@ -634,6 +634,30 @@ h3 {
   padding-bottom: 0;
 }
 
+/* ─── Blur-up progressive image loading ─────────────────────────── */
+/*
+ * .blurred  = placeholder shown (tiny base64, scaled up, blurred)
+ * .loaded   = full WebP thumbnail loaded, crisp
+ */
+.gallery-image.blurred {
+  filter: blur(20px);
+  transform: scale(1.05);
+  transition: filter 500ms ease, transform 500ms ease, opacity 300ms ease;
+}
+
+.gallery-image.loaded {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Fade in when image loads (applies to all images) */
+.gallery-image {
+  transition:
+    transform 300ms ease,
+    filter 500ms ease,
+    opacity 400ms ease;
+}
+
 /* ─── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 860px) {
   .site-header {
