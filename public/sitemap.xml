@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Home Page -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/nature-macro/white-ladybug.jpeg</image:loc>
+      <image:title>Ashy Grey Ladybird on Lichen - Extreme Macro Photography</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/landscape/Wetland.png</image:loc>
+      <image:title>Highland Wetland at Twilight - Landscape Photography</image:title>
+    </image:image>
+  </url>
+
+  <!-- Gallery Index -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/gallery.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Nature Macro Subgallery -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/assets/nature-macro/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/nature-macro/Bee.jpg</image:loc>
+      <image:title>Wild Honeybee on Morning Blossom - Macro Photography</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/nature-macro/Dragonfly.jpg</image:loc>
+      <image:title>Dewdrop Perched Dragonfly - High Magnification Focus Stack</image:title>
+    </image:image>
+  </url>
+
+  <!-- Woodland Subgallery -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/assets/woodland/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/woodland/woodland-path.jpg</image:loc>
+      <image:title>Moss-Covered Canopy Path - Silent Valley National Park</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/woodland/sun%20rize%20tree%20(1%20of%201)-topaz-denoise.jpg</image:loc>
+      <image:title>Solitary Acacia in Morning Mist</image:title>
+    </image:image>
+  </url>
+
+  <!-- Landscape Subgallery -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/assets/landscape/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/landscape/Wetland.png</image:loc>
+      <image:title>Highland Wetland at Twilight - Ladakh Western Himalayas</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/landscape/IMG_20240608_054206%20(1)%20(1).jpg</image:loc>
+      <image:title>Alpine Lake Morning Reflections - Himalayan Valleys</image:title>
+    </image:image>
+  </url>
+
+  <!-- Other Projects Subgallery -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/assets/other-projects/</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://vipinslenscraft.vercel.app/assets/other-projects/city-at-dusk.jpg</image:loc>
+      <image:title>Atmospheric Twilight Skyline - Urban Studies</image:title>
+    </image:image>
+  </url>
+
+  <!-- Workshops Page -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/workshops.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Latest & News Page -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/latest-news.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Information & Bio Page -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/information.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://vipinslenscraft.vercel.app/contact.html</loc>
+    <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

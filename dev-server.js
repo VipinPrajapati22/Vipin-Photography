@@ -17,14 +17,16 @@ const MIME_TYPES = {
   ".json": "application/json; charset=utf-8",
   ".png":  "image/png",
   ".svg":  "image/svg+xml",
+  ".txt":  "text/plain; charset=utf-8",
   ".webp": "image/webp",
+  ".xml":  "application/xml; charset=utf-8",
 };
 
 // Image extensions that get long-lived browser cache (1 year)
 const IMAGE_EXTS   = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".svg"]);
 // Image extensions we watch and auto-convert
 const WATCH_EXTS   = new Set([".jpg", ".jpeg", ".png", ".tiff", ".tif", ".webp"]);
-const GALLERIES    = ["home", "landscape", "woodland", "nature-macro", "other-projects"];
+const GALLERIES    = ["hero", "home", "landscape", "woodland", "nature-macro", "other-projects"];
 const ASSETS_DIR   = path.join(PUBLIC_DIR, "assets");
 
 /* ─── Auto-thumbnail generator ─────────────────────────────────── */

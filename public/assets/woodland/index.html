@@ -3,31 +3,121 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Woodland | Macro Vipin Photography</title>
+    <title>Woodland Gallery | Macro Vipin Photography</title>
+    <meta
+      name="description"
+      content="Atmospheric woodland, misty forest paths, and ancient canopies photographed in India by Macro Vipin."
+    />
+    <link rel="canonical" href="https://vipinslenscraft.vercel.app/assets/woodland/" />
     <link rel="icon" href="../../LOGO.jpg" type="image/jpeg" />
     <link rel="apple-touch-icon" href="../../LOGO.jpg" />
-    <link rel="stylesheet" href="../../styles.css?v=4" />
+    <link rel="stylesheet" href="../../styles.css?v=7" />
   </head>
   <body>
+    <!-- Site Header -->
     <header class="site-header" id="top">
-      <a class="brand" href="../../index.html">
-        <div class="brand-text">
-          <span class="brand-script">Macro Vipin</span>
-          <span class="brand-type">Photography</span>
+      <div class="container header-inner">
+        <a class="brand" href="../../index.html" aria-label="Macro Vipin Photography Home">
+          <img src="../../LOGO.jpg" alt="Macro Vipin Logo" class="brand-logo" width="44" height="44" />
+          <div class="brand-info">
+            <span class="brand-name">Macro Vipin</span>
+            <span class="brand-tagline">Photography &bull; India</span>
+          </div>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="../../index.html">Home</a>
+          <a href="../../gallery.html" class="active">Gallery</a>
+          <a href="../../workshops.html">Workshops</a>
+          <a href="../../latest-news.html">Latest & News</a>
+          <a href="../../information.html">Information</a>
+          <a href="../../contact.html">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="../../contact.html?type=Prints+Inquiry&subject=Woodland+Prints" class="btn btn-primary header-cta">Inquire Prints</a>
+          <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+          </button>
         </div>
-        <img src="../../LOGO.jpg" alt="Macro Vipin Photography Logo" class="brand-logo" />
-      </a>
-      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="../../index.html">Home</a><a href="../../gallery.html">Gallery</a><a href="../../latest-news.html">Latest & News</a><a href="../../workshops.html">Workshops</a><a href="../../information.html">Information</a><a href="../../contact.html">Contact</a>
-      </nav>
+      </div>
     </header>
 
-    <main class="gallery-page">
-      <p class="eyebrow">Gallery</p>
-      <h1>Woodland</h1>
-      <p>Quiet paths, tree canopies, and woodland light.</p>
-      <div class="empty-grid" data-gallery="woodland" aria-label="Woodland image gallery"></div>
-    </main><script src="../../script.js"></script>
+    <main>
+      <!-- Page Hero -->
+      <section class="page-hero">
+        <div class="container page-hero-inner reveal">
+          <a href="../../gallery.html" class="btn-link" style="margin-bottom: 16px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            All Collections
+          </a>
+          <span class="eyebrow">Collection No. 02</span>
+          <h1>Woodland</h1>
+          <p>Quiet corridors, ancient mossy trunks, and morning mist filtering through dense canopies across the Western Ghats and Himalayan foothills.</p>
+        </div>
+      </section>
+
+      <!-- Grid -->
+      <section class="section" aria-label="Woodland Image Stream">
+        <div class="container">
+          <div class="photo-grid" data-gallery="woodland" aria-label="Woodland images">
+            <!-- Dynamically populated via script.js?v=7 -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Full Site Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top-grid">
+          <div class="footer-brand">
+            <a class="brand" href="../../index.html">
+              <img src="../../LOGO.jpg" alt="Macro Vipin Logo" class="brand-logo" width="38" height="38" />
+              <div class="brand-info">
+                <span class="brand-name">Macro Vipin</span>
+                <span class="brand-tagline">Photography</span>
+              </div>
+            </a>
+            <p>Fine art macro, woodland, and landscape photography based in India.</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Galleries</h4>
+            <div class="footer-links">
+              <a href="../nature-macro/">Nature Macro</a>
+              <a href="../woodland/">Woodland</a>
+              <a href="../landscape/">Landscape</a>
+              <a href="../other-projects/">Other / Projects</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Learn & Read</h4>
+            <div class="footer-links">
+              <a href="../../workshops.html">Field Workshops</a>
+              <a href="../../latest-news.html">Field Stories</a>
+              <a href="../../information.html">About & Gear</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <div class="footer-links">
+              <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="../../contact.html">Contact</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Macro Vipin Photography. All rights reserved.</p>
+          <a href="#top" class="back-to-top">Back to top †‘</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../script.js?v=7"></script>
   </body>
 </html>

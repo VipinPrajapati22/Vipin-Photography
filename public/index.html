@@ -3,53 +3,458 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Macro Vipin Photography</title>
+    <title>Macro Vipin Photography | Fine Art Nature, Macro & Landscape Photography</title>
     <meta
       name="description"
-      content="A photography portfolio for landscape, woodland, nature macro, and personal projects by Macro Vipin."
+      content="Fine art nature, extreme macro, woodland, and landscape photography by Macro Vipin, based in India. Immersive field workshops, fine art prints, and high-magnification insect portraits."
     />
+    <meta name="author" content="Macro Vipin" />
+    <meta name="keywords" content="macro photography, nature macro, insect photography, focus stacking, landscape photography, woodland photography, India wildlife, photography workshops" />
+    <link rel="canonical" href="https://vipinslenscraft.vercel.app/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vipinslenscraft.vercel.app/" />
+    <meta property="og:title" content="Macro Vipin Photography | Visual Stories of the Smallest Worlds" />
+    <meta property="og:description" content="Immersive macro, woodland, and landscape photography based in India. Explore high-magnification close-ups, misty forest paths, and field workshops." />
+    <meta property="og:image" content="https://vipinslenscraft.vercel.app/LOGO.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Macro Vipin Photography" />
+    <meta name="twitter:description" content="Visual stories of the smallest worlds & untamed terrains by Macro Vipin." />
+    <meta name="twitter:image" content="https://vipinslenscraft.vercel.app/LOGO.jpg" />
+
+    <!-- Favicons -->
     <link rel="icon" href="LOGO.jpg" type="image/jpeg" />
     <link rel="apple-touch-icon" href="LOGO.jpg" />
-    <link rel="stylesheet" href="styles.css?v=4" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css?v=7" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://vipinslenscraft.vercel.app/#person",
+          "name": "Macro Vipin",
+          "url": "https://vipinslenscraft.vercel.app/",
+          "image": "https://vipinslenscraft.vercel.app/LOGO.jpg",
+          "jobTitle": "Nature & Macro Photographer",
+          "sameAs": [
+            "https://www.instagram.com/vipinslenscraft/"
+          ],
+          "description": "Photographer based in India specialising in high-magnification nature macro, focus stacking, and atmospheric landscape imagery."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://vipinslenscraft.vercel.app/#website",
+          "url": "https://vipinslenscraft.vercel.app/",
+          "name": "Macro Vipin Photography",
+          "publisher": {
+            "@id": "https://vipinslenscraft.vercel.app/#person"
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
+    <!-- Site Header -->
     <header class="site-header" id="top">
-      <a class="brand" href="#top" aria-label="Macro Vipin Photography home">
-        <div class="brand-text">
-          <span class="brand-script">Macro Vipin</span>
-          <span class="brand-type">Photography</span>
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Macro Vipin Photography Home">
+          <img src="LOGO.jpg" alt="Macro Vipin Logo" class="brand-logo" width="44" height="44" />
+          <div class="brand-info">
+            <span class="brand-name">Macro Vipin</span>
+            <span class="brand-tagline">Photography &bull; India</span>
+          </div>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="index.html" class="active">Home</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="workshops.html">Workshops</a>
+          <a href="latest-news.html">Latest & News</a>
+          <a href="information.html">Information</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="contact.html?type=General+Enquiry" class="btn btn-primary header-cta">Book / Enquire</a>
+          <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+          </button>
         </div>
-        <img src="LOGO.jpg" alt="Macro Vipin Photography Logo" class="brand-logo" />
-      </a>
-
-      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
-        <span></span>
-        <span></span>
-      </button>
-
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="index.html">Home</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="latest-news.html">Latest & News</a>
-        <a href="workshops.html">Workshops</a>
-        <a href="information.html">Information</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+      </div>
     </header>
 
     <main>
-      <section class="home-mosaic" data-gallery="home" aria-label="Featured photography"></section>
+      <!-- Hero Section with Dynamic Slideshow -->
+      <section class="hero-home" aria-label="Introduction hero">
+        <div class="hero-bg" id="heroSlideshow">
+          <div class="hero-slide active">
+            <img src="assets/hero/IMG_20260310_065943_2 (1).webp" alt="Dew-Coated Orange Ladybird Macro by Macro Vipin" fetchpriority="high" />
+          </div>
+          <div class="hero-slide">
+            <img src="assets/hero/IMG_20260318_074327_TIMEBURST10.webp" alt="Spiny Orb-Weaver Macro by Macro Vipin" loading="lazy" />
+          </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content reveal">
+          <span class="eyebrow">Macro & Fine Art Photography</span>
+          <h1 class="hero-title">Visual Stories of the Smallest Worlds</h1>
+          <p class="hero-subtitle">Quiet, immersive nature, woodland, and extreme high-magnification macro photography based in India.</p>
+          <div class="hero-actions">
+            <a href="gallery.html" class="btn btn-primary">
+              Explore Galleries
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="workshops.html" class="btn btn-outline">Join a Workshop</a>
+          </div>
+        </div>
+
+        <!-- Slideshow Controls -->
+        <div class="hero-controls" aria-label="Hero background controls">
+          <button class="hero-nav-btn hero-prev" type="button" aria-label="Previous slide">&#10094;</button>
+          <div class="hero-indicators" id="heroIndicators"></div>
+          <button class="hero-nav-btn hero-next" type="button" aria-label="Next slide">&#10095;</button>
+        </div>
+      </section>
+
+      <!-- Featured Curated Work (Masonry Grid) -->
+      <section class="section" id="featured" aria-label="Featured Photography">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="eyebrow">Curated Selection</span>
+            <h2>Featured Field Work</h2>
+            <p>A glimpse into recent focus-stacked macro portraits, atmospheric woodland light, and untouched natural terrain.</p>
+          </div>
+
+          <div class="photo-grid" data-gallery="home" data-limit="6" aria-label="Featured photography gallery">
+            <!-- Dynamic WebP thumbnails + placeholders injected via script.js?v=7 -->
+          </div>
+
+          <div style="text-align: center; margin-top: 48px;" class="reveal">
+            <a href="gallery.html" class="btn btn-outline">
+              View Complete Collections
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 Genre Showcase Cards -->
+      <section class="section section-darker" aria-label="Photography Genres">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="eyebrow eyebrow-amber">Portfolio Genres</span>
+            <h2>Explore by Subject</h2>
+            <p>From millimeter-scale insect anatomy to expansive montane horizons.</p>
+          </div>
+
+          <div class="genre-grid">
+            <!-- Nature Macro -->
+            <a href="assets/nature-macro/" class="genre-tile nature-macro reveal">
+              <span class="genre-tile-badge">Extreme Macro</span>
+              <h3>Nature Macro</h3>
+              <p>High-magnification focus stacks revealing compound eyes, dewdrops, and the secret geometry of insects.</p>
+              <span class="genre-tile-link">
+                Open Gallery
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+            </a>
+
+            <!-- Woodland -->
+            <a href="assets/woodland/" class="genre-tile woodland reveal">
+              <span class="genre-tile-badge">Atmosphere</span>
+              <h3>Woodland</h3>
+              <p>Subtle morning light, ancient canopies, and moss-draped forest trails across the Western Ghats.</p>
+              <span class="genre-tile-link">
+                Open Gallery
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+            </a>
+
+            <!-- Landscape -->
+            <a href="assets/landscape/" class="genre-tile landscape reveal">
+              <span class="genre-tile-badge">Wilderness</span>
+              <h3>Landscape</h3>
+              <p>Montane wetlands, dramatic golden hours, and untamed natural geography.</p>
+              <span class="genre-tile-link">
+                Open Gallery
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+            </a>
+
+            <!-- Other Projects -->
+            <a href="assets/other-projects/" class="genre-tile other-projects reveal">
+              <span class="genre-tile-badge">Special Series</span>
+              <h3>Other / Projects</h3>
+              <p>Monochrome architectural silhouettes, experimental lighting, and environmental photo essays.</p>
+              <span class="genre-tile-link">
+                Open Gallery
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Teaser -->
+      <section class="section" aria-label="About Macro Vipin">
+        <div class="container">
+          <div class="about-teaser-grid">
+            <div class="about-portrait-card reveal">
+              <img src="LOGO.jpg" alt="Macro Vipin portrait with gear" loading="lazy" />
+              <div class="about-portrait-caption">Macro Vipin €” Field Naturalist & Macro Photographer</div>
+            </div>
+
+            <div class="about-teaser-text reveal">
+              <span class="eyebrow">The Photographer</span>
+              <h2>Patience, Precision & Reverence for Nature</h2>
+              <p class="lead">"Most people walk right past the most extraordinary architecture on Earth simply because it measures less than five millimeters across."</p>
+              <p>Based in India, Vipin spends hundreds of hours in the field waiting for dawn stillness. Using custom handheld diffusers and precision multi-shot focus bracketing, his imagery bridges scientific detail and fine art atmosphere.</p>
+              <p>Whether tracking bioluminescent fireflies in the monsoons or documenting fragile wetland habitats, the mission remains constant: zero disturbance to living subjects and authentic natural light reproduction.</p>
+              <div style="margin-top: 28px;">
+                <a href="information.html" class="btn btn-outline">Read Full Bio & Gear Breakdown</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Upcoming Workshop Spotlight -->
+      <section class="section section-darker" aria-label="Upcoming Workshop">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="eyebrow eyebrow-amber">Learn in the Field</span>
+            <h2>Upcoming Field Masterclass</h2>
+            <p>Small-group intensive workshops focusing on field craft, focus stacking, and natural lighting.</p>
+          </div>
+
+          <div class="workshop-card reveal" style="max-width: 860px; margin-inline: auto;">
+            <span class="workshop-card-tag">Limited to 4 Seats</span>
+            <div>
+              <h3>Dawn Macro Walk & Field Focus Stacking</h3>
+              <p>An immersive morning in rich botanical reserves. Learn to spot microfauna, manage diffusers in the wind, execute multi-shot manual brackets, and master post-processing in Zerene / Helicon Focus.</p>
+            </div>
+
+            <div class="workshop-specs">
+              <div class="spec-item">
+                <span class="spec-label">Duration</span>
+                <span class="spec-value">6 Hours (Dawn to Noon)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Location</span>
+                <span class="spec-value">Forest Trails & Reserves, India</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Skill Level</span>
+                <span class="spec-value">Beginner to Intermediate</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Included</span>
+                <span class="spec-value">Field guidance + Editing video guide</span>
+              </div>
+            </div>
+
+            <div class="workshop-price-row">
+              <div class="workshop-price">
+                ‚¹4,999 <span>/ participant</span>
+              </div>
+              <a href="contact.html?type=Workshop+Booking&subject=Dawn+Macro+Walk" class="btn btn-moss">Reserve a Seat</a>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 36px;" class="reveal">
+            <a href="workshops.html" class="btn-link">
+              View All Workshops & FAQs
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Latest Field Story Teaser -->
+      <section class="section" aria-label="Latest Story">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="eyebrow">Field Notes & Stories</span>
+            <h2>From the Field</h2>
+            <p>Behind-the-scenes techniques, ethical considerations, and expedition journals.</p>
+          </div>
+
+          <div class="stories-grid">
+            <article class="story-card reveal">
+              <div class="story-image-wrap">
+                <img src="assets/nature-macro/.thumbs/Bee.webp" alt="Wild honeybee macro study" loading="lazy" />
+              </div>
+              <div class="story-content">
+                <div class="story-meta">
+                  <span>Nature Macro</span>
+                  <span class="dot">&bull;</span>
+                  <span>5 Min Read</span>
+                </div>
+                <h3>Focus Stacking in the Wild: Capturing Micro Fauna at 3:1 Magnification</h3>
+                <p>How to eliminate camera shake, work with natural morning dew, and craft soft diffusion without disturbing resting insects.</p>
+                <a href="latest-news.html" class="btn-link">Read Story</a>
+              </div>
+            </article>
+
+            <article class="story-card reveal">
+              <div class="story-image-wrap">
+                <img src="assets/woodland/.thumbs/woodland-path.webp" alt="Mossy forest pathway" loading="lazy" />
+              </div>
+              <div class="story-content">
+                <div class="story-meta">
+                  <span>Woodland</span>
+                  <span class="dot">&bull;</span>
+                  <span>4 Min Read</span>
+                </div>
+                <h3>Chasing Monsoon Mist in the Western Ghats</h3>
+                <p>Composing quiet woodland scenes during high humidity and capturing the subtle emerald tones of rainforest canopies.</p>
+                <a href="latest-news.html" class="btn-link">Read Story</a>
+              </div>
+            </article>
+
+            <article class="story-card reveal">
+              <div class="story-image-wrap">
+                <img src="assets/landscape/.thumbs/Wetland.webp" alt="Wetland at dusk" loading="lazy" />
+              </div>
+              <div class="story-content">
+                <div class="story-meta">
+                  <span>Field Craft</span>
+                  <span class="dot">&bull;</span>
+                  <span>6 Min Read</span>
+                </div>
+                <h3>The Gear Bag: Specialized Optics for Ultra-High Magnification</h3>
+                <p>A breakdown of manual aperture macro lenses, custom twin-flash brackets, and lightweight carbon fiber tripods.</p>
+                <a href="latest-news.html" class="btn-link">Read Story</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Instagram Strip Section -->
+      <section class="insta-strip" aria-label="Instagram Feed">
+        <div class="container">
+          <div class="insta-header reveal">
+            <div>
+              <span class="eyebrow">Field Updates</span>
+              <h3 style="margin-bottom: 0;">Follow @vipinslenscraft</h3>
+            </div>
+            <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 8px 18px; font-size: 12px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              Follow on Instagram
+            </a>
+          </div>
+
+          <div class="insta-grid reveal">
+            <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer" class="insta-tile" aria-label="Instagram photo 1">
+              <img src="assets/nature-macro/.thumbs/white-ladybug.webp" alt="Ladybug macro" loading="lazy" />
+              <div class="insta-tile-overlay"><span>View</span></div>
+            </a>
+            <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer" class="insta-tile" aria-label="Instagram photo 2">
+              <img src="assets/nature-macro/.thumbs/Dragonfly.webp" alt="Dragonfly macro" loading="lazy" />
+              <div class="insta-tile-overlay"><span>View</span></div>
+            </a>
+            <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer" class="insta-tile" aria-label="Instagram photo 3">
+              <img src="assets/woodland/.thumbs/woodland-path.webp" alt="Woodland path" loading="lazy" />
+              <div class="insta-tile-overlay"><span>View</span></div>
+            </a>
+            <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer" class="insta-tile" aria-label="Instagram photo 4">
+              <img src="assets/landscape/.thumbs/Wetland.webp" alt="Wetland twilight" loading="lazy" />
+              <div class="insta-tile-overlay"><span>View</span></div>
+            </a>
+            <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer" class="insta-tile" aria-label="Instagram photo 5">
+              <img src="assets/nature-macro/.thumbs/Bee.webp" alt="Bee close-up" loading="lazy" />
+              <div class="insta-tile-overlay"><span>View</span></div>
+            </a>
+            <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer" class="insta-tile" aria-label="Instagram photo 6">
+              <img src="assets/other-projects/.thumbs/city-at-dusk.webp" alt="City dusk" loading="lazy" />
+              <div class="insta-tile-overlay"><span>View</span></div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA Banner -->
+      <section class="cta-banner" aria-label="Contact call to action">
+        <div class="container cta-banner-content reveal">
+          <span class="eyebrow eyebrow-amber">Collaborate & Collect</span>
+          <h2>Have a Project, Print Request, or Workshop Inquiry?</h2>
+          <p>Whether you are looking for museum-grade archival prints, editorial licensing, or private 1-on-1 field training, let's connect.</p>
+          <div style="margin-top: 32px;">
+            <a href="contact.html" class="btn btn-primary" style="padding: 14px 32px; font-size: 14px;">Get in Touch</a>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <!-- Full Site Footer -->
     <footer class="site-footer">
-      <p>All images on this website are copyright by Macro Vipin Photography Â© 2026</p>
-      <nav aria-label="Footer navigation">
-        <a href="index.html">Home</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+      <div class="container">
+        <div class="footer-top-grid">
+          <div class="footer-brand">
+            <a class="brand" href="index.html">
+              <img src="LOGO.jpg" alt="Macro Vipin Logo" class="brand-logo" width="38" height="38" />
+              <div class="brand-info">
+                <span class="brand-name">Macro Vipin</span>
+                <span class="brand-tagline">Photography</span>
+              </div>
+            </a>
+            <p>Fine art macro, woodland, and landscape photography based in India. Dedicated to ethical wildlife documentation and quiet nature observation.</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Galleries</h4>
+            <div class="footer-links">
+              <a href="assets/nature-macro/">Nature Macro</a>
+              <a href="assets/woodland/">Woodland</a>
+              <a href="assets/landscape/">Landscape</a>
+              <a href="assets/other-projects/">Other / Projects</a>
+              <a href="gallery.html">All Collections</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Learn & Read</h4>
+            <div class="footer-links">
+              <a href="workshops.html">Field Workshops</a>
+              <a href="workshops.html#faq">Workshop FAQ</a>
+              <a href="latest-news.html">Field Stories</a>
+              <a href="information.html#gear">Gear Breakdown</a>
+              <a href="information.html#prints">Fine Art Prints</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <div class="footer-links">
+              <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer">Instagram @vipinslenscraft</a>
+              <a href="contact.html">Send an Enquiry</a>
+              <a href="information.html">About Vipin</a>
+              <a href="sitemap.xml">Sitemap</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Macro Vipin Photography. All images and content copyright protected.</p>
+          <a href="#top" class="back-to-top">
+            Back to top
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+          </a>
+        </div>
+      </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=7"></script>
   </body>
 </html>

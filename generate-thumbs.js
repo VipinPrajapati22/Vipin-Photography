@@ -14,7 +14,7 @@ const path  = require('path');
 const fs    = require('fs');
 
 const ASSETS_DIR = path.join(__dirname, 'public', 'assets');
-const GALLERIES  = ['home', 'landscape', 'woodland', 'nature-macro', 'other-projects'];
+const GALLERIES  = ['hero', 'home', 'landscape', 'woodland', 'nature-macro', 'other-projects'];
 
 const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tiff', '.tif']);
 
