@@ -1,17 +1,56 @@
-/**
- * Macro Vipin Photography — Interactive Engine
- * Fast, progressive image loading, rich lightbox, filterable galleries & animations
- */
+// Apply theme immediately before DOM render to avoid flash
+(function() {
+  const saved = localStorage.getItem("mv-theme");
+  if (saved) {
+    document.documentElement.setAttribute("data-theme", saved);
+  } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+    document.documentElement.setAttribute("data-theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
+})();
 
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
   initNavigation();
   initHeroSlideshow();
   initScrollReveal();
   initGalleries();
-  initFaqAccordion();
   initContactForm();
   initFilterTabs();
 });
+
+/* ─── 0. Dynamic Theme Switcher (Dark / Light) ─────────────────── */
+function initTheme() {
+  const toggleBtns = document.querySelectorAll(".theme-toggle");
+  
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("mv-theme", theme);
+    toggleBtns.forEach((btn) => {
+      btn.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
+      btn.setAttribute("title", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
+    });
+  }
+
+  const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  applyTheme(currentTheme);
+
+  toggleBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const active = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+      const nextTheme = active === "light" ? "dark" : "light";
+      applyTheme(nextTheme);
+    });
+  });
+
+  // Listen for OS system theme changes if user hasn't explicitly set preference
+  window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e) => {
+    if (!localStorage.getItem("mv-theme")) {
+      applyTheme(e.matches ? "light" : "dark");
+    }
+  });
+}
 
 /* ─── 1. Navigation & Mobile Drawer ────────────────────────────── */
 function initNavigation() {
@@ -25,7 +64,6 @@ function initNavigation() {
     siteNav.classList.toggle("open", !isExpanded);
   });
 
-  // Close mobile nav on link click
   siteNav?.addEventListener("click", (e) => {
     if (e.target instanceof HTMLAnchorElement) {
       siteNav.classList.remove("open");
@@ -33,19 +71,14 @@ function initNavigation() {
     }
   });
 
-  // Header scroll state
-  let lastScroll = 0;
   window.addEventListener("scroll", () => {
-    const currentScroll = window.scrollY;
-    if (currentScroll > 50) {
+    if (window.scrollY > 50) {
       header?.classList.add("scrolled");
     } else {
       header?.classList.remove("scrolled");
     }
-    lastScroll = currentScroll;
   }, { passive: true });
 
-  // Back to top button
   document.querySelector(".back-to-top")?.addEventListener("click", (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -105,7 +138,6 @@ function setupLightboxDOM() {
       <div class="lightbox-caption-bar">
         <div class="lightbox-caption-title"></div>
         <div class="lightbox-caption-details"></div>
-        <div class="lightbox-caption-camera"></div>
       </div>
     </div>
     
@@ -132,7 +164,6 @@ function setupLightboxDOM() {
     else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); showLightboxPrev(); }
   });
 
-  // Touch swipe support
   let touchStartX = 0;
   lightbox.addEventListener("touchstart", (e) => {
     touchStartX = e.changedTouches[0].screenX;
@@ -155,7 +186,6 @@ function updateLightboxUI() {
   const img = lightbox.querySelector(".lightbox-image");
   const title = lightbox.querySelector(".lightbox-caption-title");
   const details = lightbox.querySelector(".lightbox-caption-details");
-  const camera = lightbox.querySelector(".lightbox-caption-camera");
   const counter = lightbox.querySelector(".lightbox-counter");
   const prevBtn = lightbox.querySelector(".lightbox-prev");
   const nextBtn = lightbox.querySelector(".lightbox-next");
@@ -168,15 +198,12 @@ function updateLightboxUI() {
     img.style.opacity = "1";
   };
 
-  title.textContent = item.title || "Field Study";
+  title.textContent = item.title || "Photo";
   
   const detailsArray = [];
-  if (item.species) detailsArray.push(item.species);
+  if (item.category) detailsArray.push(item.category);
   if (item.location) detailsArray.push(item.location);
-  if (item.year) detailsArray.push(item.year);
   details.textContent = detailsArray.join(" · ");
-
-  camera.textContent = item.camera || "";
 
   counter.textContent = `${currentLightboxIndex + 1} / ${activeGalleryImages.length}`;
 
@@ -227,7 +254,6 @@ function fetchGalleryData(galleryName, filterVal, containerEl) {
         );
       }
 
-      // If home page, limit to 6 for the featured teaser grid
       if (containerEl.dataset.limit) {
         filtered = filtered.slice(0, parseInt(containerEl.dataset.limit, 10));
       }
@@ -236,7 +262,7 @@ function fetchGalleryData(galleryName, filterVal, containerEl) {
       renderGalleryTiles(filtered, containerEl);
     })
     .catch((err) => {
-      console.warn("Could not load dynamic API, rendering static fallback if available.", err);
+      console.warn("Could not load dynamic API", err);
       containerEl.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 48px 20px; color: var(--text-muted);">
           <p>Please ensure the local dev server or Vercel function is active.</p>
@@ -248,7 +274,6 @@ function fetchGalleryData(galleryName, filterVal, containerEl) {
 function renderGalleryTiles(images, containerEl) {
   containerEl.replaceChildren();
 
-  // Lazy observer for images
   const imgObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -281,7 +306,6 @@ function renderGalleryTiles(images, containerEl) {
     img.className = "gallery-image";
     img.alt = item.alt || item.title || "Macro Vipin Photography";
 
-    // Progressive placeholder
     if (item.placeholder) {
       img.src = item.placeholder;
       img.dataset.src = item.thumb || item.src;
@@ -296,8 +320,8 @@ function renderGalleryTiles(images, containerEl) {
     const info = document.createElement("div");
     info.className = "gallery-card-info";
     info.innerHTML = `
-      <div class="card-title">${item.title || "Field Study"}</div>
-      <div class="card-meta">${item.species ? item.species + " · " : ""}${item.location || ""}</div>
+      <div class="card-title">${item.title || "Photo"}</div>
+      <div class="card-meta">${item.location || item.category || ""}</div>
     `;
 
     thumbBtn.append(img, info);
@@ -306,7 +330,6 @@ function renderGalleryTiles(images, containerEl) {
     card.append(thumbBtn);
     containerEl.append(card);
 
-    // Eagerly load first 3
     if (index < 3 && item.placeholder) {
       img.src = item.thumb || item.src;
       img.classList.remove("blurred");
@@ -316,7 +339,6 @@ function renderGalleryTiles(images, containerEl) {
     }
   });
 
-  // Re-run scroll reveal on newly inserted cards
   initScrollReveal();
 }
 
@@ -338,57 +360,10 @@ function initFilterTabs() {
   });
 }
 
-/* ─── 5. FAQ Accordion ──────────────────────────────────────────── */
-function initFaqAccordion() {
-  const faqItems = document.querySelectorAll(".faq-item");
-  faqItems.forEach((item) => {
-    const trigger = item.querySelector(".faq-trigger");
-    const body = item.querySelector(".faq-body");
-
-    trigger?.addEventListener("click", () => {
-      const isOpen = item.classList.contains("open");
-
-      // Close all others
-      faqItems.forEach((other) => {
-        if (other !== item) {
-          other.classList.remove("open");
-          const otherBody = other.querySelector(".faq-body");
-          if (otherBody) otherBody.style.maxHeight = null;
-        }
-      });
-
-      if (!isOpen) {
-        item.classList.add("open");
-        body.style.maxHeight = body.scrollHeight + "px";
-      } else {
-        item.classList.remove("open");
-        body.style.maxHeight = null;
-      }
-    });
-  });
-}
-
-/* ─── 6. Contact Form Validation & Preset URL Params ───────────── */
+/* ─── 5. Contact Form ──────────────────────────────────────────── */
 function initContactForm() {
   const form = document.querySelector(".contact-form");
   const statusEl = document.querySelector(".form-status");
-
-  // Pre-fill enquiry type from URL params (e.g., from Workshop "Book" buttons)
-  const urlParams = new URLSearchParams(window.location.search);
-  const typeParam = urlParams.get("type");
-  const subjectParam = urlParams.get("subject");
-
-  if (typeParam) {
-    const select = document.querySelector("select[name='enquiry_type']");
-    if (select) select.value = typeParam;
-  }
-
-  if (subjectParam) {
-    const msg = document.querySelector("textarea[name='message']");
-    if (msg && !msg.value) {
-      msg.value = `Hi Vipin,\n\nI would like to enquire about the "${decodeURIComponent(subjectParam)}".\n\n`;
-    }
-  }
 
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -406,13 +381,12 @@ function initContactForm() {
     submitBtn.textContent = "Sending...";
     submitBtn.disabled = true;
 
-    // Simulate reliable enquiry receipt
     setTimeout(() => {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
       form.reset();
-      showStatus("Thank you! Your enquiry has been received. Macro Vipin will respond within 24 hours.", "success");
-    }, 600);
+      showStatus("Thank you for your message! Macro Vipin will get back to you soon.", "success");
+    }, 500);
   });
 
   function showStatus(msg, type) {
@@ -423,7 +397,7 @@ function initContactForm() {
   }
 }
 
-/* ─── 7. Hero Slideshow Engine ───────────────────────────────────── */
+/* ─── 6. Hero Slideshow Engine ───────────────────────────────────── */
 function initHeroSlideshow() {
   const heroBg = document.querySelector(".hero-bg");
   const indicatorsContainer = document.querySelector("#heroIndicators");
@@ -521,7 +495,6 @@ function initHeroSlideshow() {
   heroBg.parentElement?.addEventListener("mouseenter", stopAutoPlay);
   heroBg.parentElement?.addEventListener("mouseleave", startAutoPlay);
 
-  // Fetch dynamic hero images from /api/gallery/hero
   fetch("/api/gallery/hero")
     .then((r) => r.ok ? r.json() : Promise.reject(r))
     .then(({ images }) => {
