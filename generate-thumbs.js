@@ -1,12 +1,11 @@
 /**
  * generate-thumbs.js
  * Generates compressed WebP thumbnails + tiny blur placeholders for all gallery images.
- * Run once: node generate-thumbs.js
- * Re-run whenever you add new photos.
+ * Uses short slugs (max 40 chars, e.g. "landscape-01.webp", "landscape-01.b64") to avoid Windows path limits.
  *
  * Output structure:
- *   public/assets/<gallery>/.thumbs/<filename>.webp   (grid thumbnail ~800×533, ~50-150 KB)
- *   public/assets/<gallery>/.placeholders/<filename>.b64  (20px wide base64 blur placeholder)
+ *   public/assets/<gallery>/.thumbs/<slug>.webp
+ *   public/assets/<gallery>/.placeholders/<slug>.b64
  */
 
 const sharp = require('sharp');
@@ -17,10 +16,16 @@ const ASSETS_DIR = path.join(__dirname, 'public', 'assets');
 const GALLERIES  = ['hero', 'home', 'landscape', 'woodland', 'nature-macro', 'other-projects'];
 
 const IMAGE_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tiff', '.tif']);
+const IGNORED_FILES = new Set(['wetland.jpg']);
 
-const THUMB_WIDTH   = 900;   // grid thumbnail width (px)
-const THUMB_QUALITY = 82;    // WebP quality (0-100) — 82 is visually lossless for grids
-const PLACEHOLDER_W = 20;    // tiny blur placeholder width (px)
+const THUMB_WIDTH   = 900;
+const THUMB_QUALITY = 82;
+const PLACEHOLDER_W = 20;
+
+function getImageSlug(folder, index) {
+  const pad = String(index + 1).padStart(2, '0');
+  return `${folder}-${pad}`;
+}
 
 async function processGallery(galleryName) {
   const dir = path.join(ASSETS_DIR, galleryName);
@@ -31,65 +36,75 @@ async function processGallery(galleryName) {
 
   const thumbDir       = path.join(dir, '.thumbs');
   const placeholderDir = path.join(dir, '.placeholders');
+
+  // Clean old generated files to purge long names
+  if (fs.existsSync(thumbDir)) {
+    fs.rmSync(thumbDir, { recursive: true, force: true });
+  }
+  if (fs.existsSync(placeholderDir)) {
+    fs.rmSync(placeholderDir, { recursive: true, force: true });
+  }
+
   fs.mkdirSync(thumbDir,       { recursive: true });
   fs.mkdirSync(placeholderDir, { recursive: true });
 
-  const files = fs.readdirSync(dir).filter(f => {
-    const ext = path.extname(f).toLowerCase();
-    return IMAGE_EXTS.has(ext) && !f.startsWith('.');
-  });
+  const files = fs.readdirSync(dir)
+    .filter(f => {
+      const ext = path.extname(f).toLowerCase();
+      return IMAGE_EXTS.has(ext) && !f.startsWith('.') && !IGNORED_FILES.has(f.toLowerCase());
+    })
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
 
   console.log(`\n  📂 ${galleryName} — ${files.length} images`);
 
-  for (const file of files) {
+  for (let i = 0; i < files.length; i++) {
+    const file      = files[i];
     const src       = path.join(dir, file);
-    const base      = path.parse(file).name;
-    const thumbPath = path.join(thumbDir, `${base}.webp`);
-    const phPath    = path.join(placeholderDir, `${base}.b64`);
+    const slug      = getImageSlug(galleryName, i);
+    const thumbPath = path.join(thumbDir, `${slug}.webp`);
+    const phPath    = path.join(placeholderDir, `${slug}.b64`);
 
     // ── Thumbnail ──────────────────────────────────────────
-    if (!fs.existsSync(thumbPath)) {
-      try {
-        await sharp(src)
-          .rotate()                          // auto-orient from EXIF
-          .resize({ width: THUMB_WIDTH, withoutEnlargement: true })
-          .webp({ quality: THUMB_QUALITY, effort: 4 })
-          .toFile(thumbPath);
+    try {
+      await sharp(src)
+        .rotate()
+        .resize({ width: THUMB_WIDTH, withoutEnlargement: true })
+        .webp({ quality: THUMB_QUALITY, effort: 4 })
+        .toFile(thumbPath);
 
-        const srcSize   = (fs.statSync(src).size / 1024).toFixed(0);
-        const thumbSize = (fs.statSync(thumbPath).size / 1024).toFixed(0);
-        console.log(`    ✓ ${file} — ${srcSize} KB → ${thumbSize} KB WebP`);
-      } catch (err) {
-        console.warn(`    ✗ ${file} — ${err.message}`);
-      }
-    } else {
-      console.log(`    · ${file} — thumb exists, skipping`);
+      const srcSize   = (fs.statSync(src).size / 1024).toFixed(0);
+      const thumbSize = (fs.statSync(thumbPath).size / 1024).toFixed(0);
+      console.log(`    ✓ ${slug}.webp (${file}) — ${srcSize} KB → ${thumbSize} KB`);
+    } catch (err) {
+      console.warn(`    ✗ ${file} — ${err.message}`);
     }
 
     // ── Blur placeholder ───────────────────────────────────
-    if (!fs.existsSync(phPath)) {
-      try {
-        const buf = await sharp(src)
-          .rotate()
-          .resize({ width: PLACEHOLDER_W })
-          .blur(2)
-          .webp({ quality: 20 })
-          .toBuffer();
-        const b64 = `data:image/webp;base64,${buf.toString('base64')}`;
-        fs.writeFileSync(phPath, b64, 'utf8');
-      } catch (err) {
-        // placeholder failure is non-critical
-      }
+    try {
+      const buf = await sharp(src)
+        .rotate()
+        .resize({ width: PLACEHOLDER_W })
+        .blur(2)
+        .webp({ quality: 20 })
+        .toBuffer();
+      const b64 = `data:image/webp;base64,${buf.toString('base64')}`;
+      fs.writeFileSync(phPath, b64, 'utf8');
+    } catch (err) {
+      // placeholder failure is non-critical
     }
   }
 }
 
 async function main() {
-  console.log('🖼  Generating WebP thumbnails & blur placeholders…\n');
+  console.log('🖼  Generating short-slug WebP thumbnails & blur placeholders…\n');
   for (const g of GALLERIES) {
     await processGallery(g);
   }
-  console.log('\n✅  Done. Restart your dev server to serve the new thumbnails.\n');
+  console.log('\n✅  Done.\n');
 }
 
-main().catch(err => { console.error(err); process.exit(1); });
+if (require.main === module) {
+  main().catch(err => { console.error(err); process.exit(1); });
+}
+
+module.exports = { getImageSlug };

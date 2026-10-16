@@ -1,0 +1,586 @@
+/* ==========================================================================
+   PIXIESET-STYLE GALLERY LAYOUT — SHARED STYLESHEET
+   Reused by gallery.html & all collection sub-pages
+   ========================================================================== */
+
+:root {
+  --px-bg: #ffffff;
+  --px-bg-cover: #f5f5f5;
+  --px-text: #111111;
+  --px-muted: #777777;
+  --px-light-gray: #e8e8e8;
+  --px-border: #e5e5e5;
+  --px-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --px-letter-spacing: 0.12em;
+  --px-dark-btn: #1a1a1a;
+  --px-dark-btn-hover: #000000;
+}
+
+[data-theme="dark"] {
+  --px-bg: #0b0b0b;
+  --px-bg-cover: #141414;
+  --px-text: #eeeeee;
+  --px-muted: #999999;
+  --px-light-gray: #252525;
+  --px-border: #222222;
+  --px-dark-btn: #ffffff;
+  --px-dark-btn-hover: #dddddd;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font-sans);
+}
+
+body.pixie-body {
+  background-color: var(--px-bg);
+  color: var(--px-text);
+  font-family: var(--px-font-sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── 1. COVER HERO (FULL VIEWPORT) ─── */
+.pixie-cover {
+  width: 100%;
+  height: 100vh;
+  min-height: 560px;
+  background-color: var(--px-bg-cover);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.pixie-cover-media {
+  flex: 1;
+  padding: 12px 12px 0 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pixie-cover-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pixie-cover-bar {
+  height: 64px;
+  background-color: var(--px-bg-cover);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .pixie-cover-bar {
+  border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+.pixie-cover-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pixie-cover-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pixie-cover-brand-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--px-text);
+}
+
+.pixie-cover-title {
+  font-size: clamp(14px, 1.8vw, 20px);
+  font-weight: 700;
+  letter-spacing: var(--px-letter-spacing);
+  text-transform: uppercase;
+  color: var(--px-text);
+  text-align: center;
+}
+
+.pixie-cover-btn {
+  background-color: var(--px-dark-btn);
+  color: var(--px-bg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.pixie-cover-btn:hover {
+  opacity: 0.88;
+}
+
+@media (max-width: 640px) {
+  .pixie-cover-brand-text {
+    display: none;
+  }
+  .pixie-cover-bar {
+    padding: 0 16px;
+  }
+  .pixie-cover-title {
+    font-size: 13px;
+  }
+  .pixie-cover-btn {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+}
+
+/* ─── 2. STICKY TOOLBAR ─── */
+.pixie-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 54px;
+  background-color: var(--px-bg);
+  border-bottom: 1px solid var(--px-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.pixie-toolbar-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.pixie-toolbar-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--px-text);
+  line-height: 1.2;
+}
+
+.pixie-toolbar-sub {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--px-muted);
+}
+
+.pixie-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.pixie-tool-btn {
+  background: transparent;
+  border: none;
+  color: var(--px-text);
+  cursor: pointer;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.pixie-tool-btn:hover {
+  opacity: 0.65;
+}
+
+.pixie-tool-btn svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin="round";
+}
+
+/* Mini Menu Dropdown */
+.pixie-menu-wrapper {
+  position: relative;
+}
+
+.pixie-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: var(--px-bg);
+  border: 1px solid var(--px-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  min-width: 180px;
+  padding: 8px 0;
+  display: none;
+  flex-direction: column;
+  z-index: 101;
+}
+
+.pixie-menu-dropdown.open {
+  display: flex;
+}
+
+.pixie-menu-dropdown a {
+  padding: 10px 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--px-text);
+  transition: background-color 0.15s ease;
+}
+
+.pixie-menu-dropdown a:hover {
+  background-color: var(--px-light-gray);
+}
+
+/* ─── 3. INTRO SECTION ─── */
+.pixie-intro {
+  padding: 48px 24px 36px 24px;
+  text-align: center;
+}
+
+.pixie-intro p {
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--px-muted);
+}
+
+/* ─── 4. MASONRY PHOTO GRID ─── */
+.pixie-grid-wrap {
+  padding: 0 10px 48px 10px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.pixie-grid {
+  column-count: 3;
+  column-gap: 3px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .pixie-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 500px) {
+  .pixie-grid {
+    column-count: 1;
+  }
+}
+
+.pixie-item {
+  display: block;
+  width: 100%;
+  margin-bottom: 3px;
+  break-inside: avoid;
+  background-color: var(--px-light-gray);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.pixie-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.25s ease;
+}
+
+.pixie-item:hover img {
+  opacity: 0.9;
+}
+
+/* Load More Button */
+.pixie-load-more-wrap {
+  text-align: center;
+  padding: 24px 0 40px 0;
+}
+
+.pixie-load-more-btn {
+  background-color: var(--px-dark-btn);
+  color: var(--px-bg);
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.pixie-load-more-btn:hover {
+  opacity: 0.85;
+}
+
+/* ─── 5. FULL-SCREEN LIGHTBOX ─── */
+.pixie-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(10, 10, 10, 0.96);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.pixie-lightbox.open {
+  display: flex;
+}
+
+.pixie-lightbox-img {
+  max-width: 95vw;
+  max-height: 90vh;
+  object-fit: contain;
+  transition: opacity 0.2s ease;
+}
+
+.pixie-lb-btn {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10001;
+}
+
+.pixie-lb-btn:hover {
+  opacity: 0.7;
+}
+
+.pixie-lb-close {
+  top: 20px;
+  right: 24px;
+}
+
+.pixie-lb-close svg {
+  width: 24px;
+  height: 24px;
+  stroke: #ffffff;
+}
+
+.pixie-lb-prev {
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pixie-lb-next {
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pixie-lb-prev svg,
+.pixie-lb-next svg {
+  width: 32px;
+  height: 32px;
+  stroke: #ffffff;
+}
+
+.pixie-lb-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #aaaaaa;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  z-index: 10001;
+}
+
+/* Toast message for URL copied */
+.pixie-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background-color: #111111;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10002;
+}
+
+.pixie-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── 6. FOOTER ─── */
+.pixie-footer {
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid var(--px-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.pixie-footer-btn {
+  background-color: var(--px-dark-btn);
+  color: var(--px-bg);
+  border: none;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.pixie-footer-btn:hover {
+  opacity: 0.85;
+}
+
+.pixie-footer-insta {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--px-muted);
+}
+
+.pixie-footer-insta a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ─── 7. GALLERY.HTML 2X2 GRID TILES ─── */
+.pixie-hub-header {
+  padding: 60px 24px 32px 24px;
+  text-align: center;
+}
+
+.pixie-hub-title {
+  font-size: clamp(22px, 3.2vw, 32px);
+  font-weight: 700;
+  letter-spacing: var(--px-letter-spacing);
+  text-transform: uppercase;
+  color: var(--px-text);
+  margin-bottom: 12px;
+}
+
+.pixie-hub-sub {
+  font-size: 13.5px;
+  color: var(--px-muted);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.pixie-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 0 24px 60px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .pixie-hub-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 16px 48px 16px;
+  }
+}
+
+.pixie-hub-card {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: block;
+  background-color: var(--px-light-gray);
+  border-radius: 2px;
+}
+
+.pixie-hub-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.pixie-hub-card:hover img {
+  transform: scale(1.03);
+}
+
+.pixie-hub-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.15) 45%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+}
+
+.pixie-hub-card-title {
+  color: #ffffff;
+  font-size: clamp(14px, 1.8vw, 20px);
+  font-weight: 700;
+  letter-spacing: var(--px-letter-spacing);
+  text-transform: uppercase;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

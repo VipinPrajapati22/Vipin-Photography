@@ -3,126 +3,120 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Landscape Gallery | Macro Vipin Photography</title>
+    <title>Landscape | Macro Vipin Photography</title>
     <meta
       name="description"
-      content="Landscape, mountain, and outdoor photography by Macro Vipin."
+      content="Landscape photography of highland wetlands, mountain views, and twilight scenery by Macro Vipin."
     />
     <link rel="canonical" href="https://vipinslenscraft.vercel.app/assets/landscape/" />
     <link rel="icon" href="../../LOGO.jpg" type="image/jpeg" />
     <link rel="apple-touch-icon" href="../../LOGO.jpg" />
-    <link rel="stylesheet" href="../../styles.css?v=8" />
+    <link rel="stylesheet" href="../gallery-pixie.css" />
   </head>
-  <body>
-    <!-- Site Header -->
-    <header class="site-header" id="top">
-      <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="Macro Vipin Photography Home">
-          <img src="../../LOGO.jpg" alt="Macro Vipin Logo" class="brand-logo" width="44" height="44" />
-          <div class="brand-info">
-            <span class="brand-name">Macro Vipin</span>
-            <span class="brand-tagline">Photography &bull; India</span>
-          </div>
-        </a>
-
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a href="../../index.html">Home</a>
-          <a href="../../gallery.html" class="active">Gallery</a>
-          <a href="../../latest-news.html">Latest & News</a>
-          <a href="../../information.html">Information</a>
-          <a href="../../contact.html">Contact</a>
-        </nav>
-
-        <div class="header-actions">
-          <button class="theme-toggle" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
-            <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          </button>
-          <a href="../../contact.html" class="btn btn-primary header-cta">Contact</a>
-          <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-          </button>
+  <body class="pixie-body">
+    <!-- 1. Full-Viewport Cover -->
+    <header class="pixie-cover" id="cover">
+      <div class="pixie-cover-media">
+        <img
+          src="A%20beautiful%20sunrise%20with%20pink%20and%20purple%20sky%20over%20misty%20hills.webp"
+          alt="Landscape Cover — Macro Vipin Photography"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <div class="pixie-cover-bar">
+        <div class="pixie-cover-brand">
+          <img src="../../LOGO.jpg" alt="Macro Vipin Logo" class="pixie-cover-logo" width="24" height="24" />
+          <span class="pixie-cover-brand-text">Macro Vipin Photography</span>
         </div>
+        <h1 class="pixie-cover-title">Landscape</h1>
+        <a href="#gallery-grid" class="pixie-cover-btn">View Gallery</a>
       </div>
     </header>
 
-    <main>
-      <!-- Page Hero -->
-      <section class="page-hero">
-        <div class="container page-hero-inner reveal">
-          <a href="../../gallery.html" class="btn-link" style="margin-bottom: 16px;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            All Collections
-          </a>
-          <span class="eyebrow">Collection</span>
-          <h1>Landscape</h1>
-          <p>Highland wetlands, mountain views, and twilight scenery.</p>
+    <!-- 2. Sticky Toolbar -->
+    <nav class="pixie-toolbar" id="toolbar" aria-label="Gallery tools">
+      <div class="pixie-toolbar-left">
+        <span class="pixie-toolbar-title">Landscape</span>
+        <span class="pixie-toolbar-sub">Macro Vipin Photography</span>
+      </div>
+      <div class="pixie-toolbar-right">
+        <!-- All Collections -->
+        <a href="../../gallery.html" class="pixie-tool-btn" title="All Collections" aria-label="All Collections">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        </a>
+        <!-- Share (Copy URL) -->
+        <button type="button" class="pixie-tool-btn pixie-share-btn" title="Share Gallery" aria-label="Share Gallery">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        </button>
+        <!-- Slideshow -->
+        <button type="button" class="pixie-tool-btn pixie-slideshow-btn" title="Play Slideshow" aria-label="Play Slideshow">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </button>
+        <!-- Theme Toggle -->
+        <button type="button" class="pixie-tool-btn pixie-theme-btn" title="Toggle theme" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <!-- Mini Menu -->
+        <div class="pixie-menu-wrapper">
+          <button type="button" class="pixie-tool-btn pixie-menu-btn" title="Menu" aria-label="Toggle Navigation Menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div class="pixie-menu-dropdown" role="menu">
+            <a href="../../index.html" role="menuitem">Home</a>
+            <a href="../../gallery.html" role="menuitem">Gallery</a>
+            <a href="../../latest-news.html" role="menuitem">Latest &amp; News</a>
+            <a href="../../information.html" role="menuitem">Information</a>
+            <a href="../../contact.html" role="menuitem">Contact</a>
+          </div>
         </div>
+      </div>
+    </nav>
+
+    <main id="gallery-grid">
+      <!-- 3. Intro -->
+      <section class="pixie-intro">
+        <p>Highland wetlands, mountain views, and twilight scenery.</p>
       </section>
 
-      <!-- Grid -->
-      <section class="section" aria-label="Landscape Image Stream">
-        <div class="container">
-          <div class="photo-grid" data-gallery="landscape" aria-label="Landscape images">
-            <!-- Dynamically populated via script.js -->
-          </div>
+      <!-- 4. Grid -->
+      <section class="pixie-grid-wrap" aria-label="Landscape Gallery Photos">
+        <div class="pixie-grid" data-gallery="landscape">
+          <!-- Populated dynamically via gallery-pixie.js -->
+        </div>
+        <div class="pixie-load-more-wrap">
+          <button type="button" class="pixie-load-more-btn" style="display: none;">Load More</button>
         </div>
       </section>
     </main>
 
-    <!-- Full Site Footer -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-top-grid">
-          <div class="footer-brand">
-            <a class="brand" href="../../index.html">
-              <img src="../../LOGO.jpg" alt="Macro Vipin Logo" class="brand-logo" width="38" height="38" />
-              <div class="brand-info">
-                <span class="brand-name">Macro Vipin</span>
-                <span class="brand-tagline">Photography</span>
-              </div>
-            </a>
-            <p>Fine art macro, woodland, and landscape photography based in India. Dedicated to ethical wildlife documentation and quiet nature observation.</p>
-          </div>
+    <!-- 5. Lightbox -->
+    <div class="pixie-lightbox" role="dialog" aria-modal="true" aria-label="Image Lightbox">
+      <button type="button" class="pixie-lb-btn pixie-lb-close" aria-label="Close Lightbox">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <button type="button" class="pixie-lb-btn pixie-lb-prev" aria-label="Previous Image">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <img class="pixie-lightbox-img" src="" alt="" />
+      <button type="button" class="pixie-lb-btn pixie-lb-next" aria-label="Next Image">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <div class="pixie-lb-counter"></div>
+    </div>
 
-          <div class="footer-col">
-            <h4>Galleries</h4>
-            <div class="footer-links">
-              <a href="../nature-macro/">Nature Macro</a>
-              <a href="../woodland/">Woodland</a>
-              <a href="../landscape/">Landscape</a>
-              <a href="../other-projects/">Other / Projects</a>
-            </div>
-          </div>
+    <!-- Toast Notification -->
+    <div class="pixie-toast" id="pixie-toast" role="status" aria-live="polite">Link copied to clipboard</div>
 
-          <div class="footer-col">
-            <h4>Navigation</h4>
-            <div class="footer-links">
-              <a href="../../index.html">Home</a>
-              <a href="../../gallery.html">Gallery</a>
-              <a href="../../latest-news.html">Latest & News</a>
-              <a href="../../information.html">Information</a>
-              <a href="../../contact.html">Contact</a>
-            </div>
-          </div>
-
-          <div class="footer-col">
-            <h4>Connect</h4>
-            <div class="footer-links">
-              <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="../../contact.html">Contact</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <p>&copy; 2026 Macro Vipin Photography.</p>
-          <a href="#top" class="back-to-top">Back to top &uarr;</a>
-        </div>
+    <!-- 6. Footer -->
+    <footer class="pixie-footer">
+      <button type="button" class="pixie-footer-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">Back to Top</button>
+      <div class="pixie-footer-insta">
+        <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer">@vipinslenscraft</a>
       </div>
     </footer>
 
-    <script src="../../script.js?v=8"></script>
+    <script src="../gallery-static-data.js"></script>
+    <script src="../gallery-pixie.js"></script>
   </body>
 </html>

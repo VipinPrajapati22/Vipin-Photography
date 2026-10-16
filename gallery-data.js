@@ -170,7 +170,14 @@ function getMetadataForFile(fileName, folder) {
   };
 }
 
-function thumbSrc(folder, fileName) {
+function thumbSrc(folder, fileName, index) {
+  if (typeof index === "number") {
+    const slug = `${folder}-${String(index + 1).padStart(2, "0")}`;
+    const thumbFile = path.join(PUBLIC_DIR, "assets", folder, ".thumbs", `${slug}.webp`);
+    if (fsSync.existsSync(thumbFile)) {
+      return `/assets/${folder}/.thumbs/${slug}.webp`;
+    }
+  }
   const base = path.parse(fileName).name;
   const thumbFile = path.join(PUBLIC_DIR, "assets", folder, ".thumbs", `${base}.webp`);
   if (fsSync.existsSync(thumbFile)) {
@@ -179,7 +186,16 @@ function thumbSrc(folder, fileName) {
   return `/assets/${folder}/${encodeURIComponent(fileName)}`;
 }
 
-function readPlaceholder(folder, fileName) {
+function readPlaceholder(folder, fileName, index) {
+  if (typeof index === "number") {
+    const slug = `${folder}-${String(index + 1).padStart(2, "0")}`;
+    const phFile = path.join(PUBLIC_DIR, "assets", folder, ".placeholders", `${slug}.b64`);
+    try {
+      return fsSync.readFileSync(phFile, "utf8").trim();
+    } catch {
+      // fallback
+    }
+  }
   const base = path.parse(fileName).name;
   const phFile = path.join(PUBLIC_DIR, "assets", folder, ".placeholders", `${base}.b64`);
   try {
@@ -189,12 +205,12 @@ function readPlaceholder(folder, fileName) {
   }
 }
 
-function buildEntry(folder, fileName) {
+function buildEntry(folder, fileName, index) {
   const meta = getMetadataForFile(fileName, folder);
   return {
     src: `/assets/${folder}/${encodeURIComponent(fileName)}`,
-    thumb: thumbSrc(folder, fileName),
-    placeholder: readPlaceholder(folder, fileName),
+    thumb: thumbSrc(folder, fileName, index),
+    placeholder: readPlaceholder(folder, fileName, index),
     alt: `${meta.title} by Macro Vipin Photography`,
     title: meta.title,
     location: meta.location,
@@ -221,7 +237,8 @@ async function getGalleryImages(galleryName) {
     const collections = await Promise.all(
       genreFolders.map(async (folder) => {
         const files = await readImageFiles(path.join(PUBLIC_DIR, "assets", folder));
-        return files.map(f => buildEntry(folder, f.name));
+        const sorted = files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
+        return sorted.map((f, i) => buildEntry(folder, f.name, i));
       })
     );
     return collections.flat();
@@ -234,7 +251,7 @@ async function getGalleryImages(galleryName) {
     if (homeFiles.length > 0) {
       return homeFiles
         .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }))
-        .map(f => buildEntry("home", f.name));
+        .map((f, i) => buildEntry("home", f.name, i));
     }
 
     const fallbackFolders = ["nature-macro", "landscape", "woodland", "other-projects"];
@@ -243,7 +260,7 @@ async function getGalleryImages(galleryName) {
         const files = await readImageFiles(path.join(PUBLIC_DIR, "assets", folder));
         return files
           .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }))
-          .map(f => buildEntry(folder, f.name));
+          .map((f, i) => buildEntry(folder, f.name, i));
       })
     );
     return collections.flat().slice(0, 16);
@@ -255,7 +272,7 @@ async function getGalleryImages(galleryName) {
   const files = await readImageFiles(path.join(PUBLIC_DIR, "assets", folder));
   return files
     .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }))
-    .map(f => buildEntry(folder, f.name));
+    .map((f, i) => buildEntry(folder, f.name, i));
 }
 
 module.exports = { PUBLIC_DIR, getGalleryImages };

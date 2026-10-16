@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Galleries & Collections | Macro Vipin Photography</title>
+    <title>Galleries &amp; Collections | Macro Vipin Photography</title>
     <meta
       name="description"
       content="Browse photo collections by Macro Vipin: nature macro close-ups, forest paths, mountain landscapes, and personal projects."
@@ -21,138 +21,120 @@
     <link rel="icon" href="LOGO.jpg" type="image/jpeg" />
     <link rel="apple-touch-icon" href="LOGO.jpg" />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="styles.css?v=8" />
+    <!-- Pixieset CSS -->
+    <link rel="stylesheet" href="assets/gallery-pixie.css" />
   </head>
-  <body>
-    <!-- Site Header -->
-    <header class="site-header" id="top">
-      <div class="container header-inner">
-        <a class="brand" href="index.html" aria-label="Macro Vipin Photography Home">
-          <img src="LOGO.jpg" alt="Macro Vipin Logo" class="brand-logo" width="44" height="44" />
-          <div class="brand-info">
-            <span class="brand-name">Macro Vipin</span>
-            <span class="brand-tagline">Photography &bull; India</span>
+  <body class="pixie-body">
+    <!-- Sticky Toolbar Header -->
+    <nav class="pixie-toolbar" id="toolbar" aria-label="Gallery navigation">
+      <div class="pixie-toolbar-left">
+        <a href="index.html" style="display: flex; align-items: center; gap: 10px;">
+          <img src="LOGO.jpg" alt="Macro Vipin Logo" class="pixie-cover-logo" width="22" height="22" />
+          <div style="display: flex; flex-direction: column;">
+            <span class="pixie-toolbar-title">Galleries</span>
+            <span class="pixie-toolbar-sub">Macro Vipin Photography</span>
+          </div>
+        </a>
+      </div>
+      <div class="pixie-toolbar-right">
+        <!-- Share (Copy URL) -->
+        <button type="button" class="pixie-tool-btn pixie-share-btn" title="Share Gallery" aria-label="Share Gallery">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        </button>
+        <!-- Theme Toggle -->
+        <button type="button" class="pixie-tool-btn pixie-theme-btn" title="Toggle theme" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <!-- Mini Menu -->
+        <div class="pixie-menu-wrapper">
+          <button type="button" class="pixie-tool-btn pixie-menu-btn" title="Menu" aria-label="Toggle Navigation Menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div class="pixie-menu-dropdown" role="menu">
+            <a href="index.html" role="menuitem">Home</a>
+            <a href="gallery.html" role="menuitem">Gallery</a>
+            <a href="latest-news.html" role="menuitem">Latest &amp; News</a>
+            <a href="information.html" role="menuitem">Information</a>
+            <a href="contact.html" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hub Header -->
+      <section class="pixie-hub-header">
+        <h1 class="pixie-hub-title">Explore the Portfolios</h1>
+        <p class="pixie-hub-sub">Browse photos organized by topic: Nature Macro, Woodland, Landscapes, and Other Projects.</p>
+      </section>
+
+      <!-- 2x2 Grid of Cover Tiles -->
+      <section class="pixie-hub-grid" aria-label="Portfolios">
+        <!-- Nature / Macro -->
+        <a href="assets/nature-macro/" class="pixie-hub-card">
+          <img
+            src="assets/nature-macro/white-ladybug.jpeg"
+            alt="Nature Macro Portfolio"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="pixie-hub-card-overlay">
+            <span class="pixie-hub-card-title">Nature / Macro</span>
           </div>
         </a>
 
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a href="index.html">Home</a>
-          <a href="gallery.html" class="active">Gallery</a>
-          <a href="latest-news.html">Latest &amp; News</a>
-          <a href="information.html">Information</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-
-        <div class="header-actions">
-          <button class="theme-toggle" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
-            <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          </button>
-          <a href="contact.html" class="btn btn-primary header-cta">Say hello</a>
-          <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <!-- Page Hero -->
-      <section class="page-hero">
-        <div class="container page-hero-inner reveal">
-          <span class="eyebrow">Photo Collections</span>
-          <h1>Explore the Portfolios</h1>
-          <p>Browse photos organized by topic: Nature Macro, Woodland, Landscape, and Other Projects.</p>
-        </div>
-      </section>
-
-      <!-- 4 Primary Genre Cards -->
-      <section class="section" aria-label="Genre Collections">
-        <div class="container">
-          <div class="genre-grid-stack">
-            <!-- Nature Macro -->
-            <a href="assets/nature-macro/" class="genre-banner nature-macro reveal">
-              <span class="genre-banner-title">NATURE / MACRO</span>
-            </a>
-
-            <!-- Woodland -->
-            <a href="assets/woodland/" class="genre-banner woodland reveal">
-              <span class="genre-banner-title">WOODLAND</span>
-            </a>
-
-            <!-- Landscape -->
-            <a href="assets/landscape/" class="genre-banner landscape reveal">
-              <span class="genre-banner-title">LANDSCAPES</span>
-            </a>
-
-            <!-- Other Projects -->
-            <a href="assets/other-projects/" class="genre-banner other-projects reveal">
-              <span class="genre-banner-title">OTHER / PROJECTS</span>
-            </a>
+        <!-- Woodland -->
+        <a href="assets/woodland/" class="pixie-hub-card">
+          <img
+            src="assets/woodland/Amidst%20the%20vibrant%20forest%2C%20a%20solitary%20sentinel%20stands%E2%80%94a%20gnarled%2C%20ancient%20tree%2C%20its%20branches%20reaching%20for%20the%20sky%2C%20whispering%20tales%20of%20resilience%20and%20time.%E2%80%9D%20%F0%9F%8C%B2%F0%9F%8D%83%E2%9C%A8.webp"
+            alt="Woodland Portfolio"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="pixie-hub-card-overlay">
+            <span class="pixie-hub-card-title">Woodland</span>
           </div>
-        </div>
+        </a>
+
+        <!-- Landscapes -->
+        <a href="assets/landscape/" class="pixie-hub-card">
+          <img
+            src="assets/landscape/A%20beautiful%20sunrise%20with%20pink%20and%20purple%20sky%20over%20misty%20hills.webp"
+            alt="Landscapes Portfolio"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="pixie-hub-card-overlay">
+            <span class="pixie-hub-card-title">Landscapes</span>
+          </div>
+        </a>
+
+        <!-- Other / Projects -->
+        <a href="assets/other-projects/" class="pixie-hub-card">
+          <img
+            src="assets/other-projects/1685432006286.jpg"
+            alt="Other / Projects Portfolio"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="pixie-hub-card-overlay">
+            <span class="pixie-hub-card-title">Other / Projects</span>
+          </div>
+        </a>
       </section>
     </main>
 
-    <!-- Full Site Footer -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-top-grid">
-          <div class="footer-brand">
-            <a class="brand" href="index.html">
-              <img src="LOGO.jpg" alt="Macro Vipin Logo" class="brand-logo" width="38" height="38" />
-              <div class="brand-info">
-                <span class="brand-name">Macro Vipin</span>
-                <span class="brand-tagline">Photography</span>
-              </div>
-            </a>
-            <p>Fine art macro, woodland, and landscape photography based in India. Dedicated to ethical wildlife documentation and quiet nature observation.</p>
-          </div>
+    <!-- Toast Notification -->
+    <div class="pixie-toast" id="pixie-toast" role="status" aria-live="polite">Link copied to clipboard</div>
 
-          <div class="footer-col">
-            <h4>Galleries</h4>
-            <div class="footer-links">
-              <a href="assets/nature-macro/">Nature Macro</a>
-              <a href="assets/woodland/">Woodland</a>
-              <a href="assets/landscape/">Landscape</a>
-              <a href="assets/other-projects/">Other / Projects</a>
-              <a href="gallery.html">All Collections</a>
-            </div>
-          </div>
-
-          <div class="footer-col">
-            <h4>Navigation</h4>
-            <div class="footer-links">
-              <a href="index.html">Home</a>
-              <a href="gallery.html">Gallery</a>
-              <a href="latest-news.html">Latest & News</a>
-              <a href="information.html">Information</a>
-              <a href="contact.html">Contact</a>
-            </div>
-          </div>
-
-          <div class="footer-col">
-            <h4>Connect</h4>
-            <div class="footer-links">
-              <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer">Instagram @vipinslenscraft</a>
-              <a href="contact.html">Send a Message</a>
-              <a href="sitemap.xml" target="_blank" rel="noopener">Sitemap (XML)</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <p>&copy; 2026 Macro Vipin Photography.</p>
-          <a href="#top" class="back-to-top">
-            Back to top
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
-          </a>
-        </div>
+    <!-- Footer -->
+    <footer class="pixie-footer">
+      <button type="button" class="pixie-footer-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">Back to Top</button>
+      <div class="pixie-footer-insta">
+        <a href="https://www.instagram.com/vipinslenscraft/" target="_blank" rel="noopener noreferrer">@vipinslenscraft</a>
       </div>
     </footer>
 
-    <script src="script.js?v=8"></script>
+    <script src="assets/gallery-pixie.js"></script>
   </body>
 </html>
