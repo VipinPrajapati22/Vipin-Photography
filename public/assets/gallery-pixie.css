@@ -581,6 +581,138 @@ a {
   z-index: 10001;
 }
 
+/* ─── 5B. DEDICATED FULL-SCREEN SLIDESHOW OVERLAY ─── */
+.pixie-slideshow-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+[data-theme="dark"] .pixie-slideshow-overlay {
+  background-color: #0b0b0b;
+}
+
+.pixie-ss-stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixie-ss-slide {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: 100vw;
+  max-height: 100dvh;
+  object-fit: contain;
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.pixie-ss-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Controls: float over the image as a small translucent pill */
+.pixie-ss-bar {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  z-index: 10005;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+[data-theme="dark"] .pixie-ss-bar {
+  background-color: rgba(0, 0, 0, 0.55);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.pixie-ss-bar.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pixie-ss-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: opacity 0.2s ease;
+}
+
+.pixie-ss-btn:hover {
+  opacity: 0.75;
+}
+
+.pixie-ss-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: #ffffff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pixie-ss-counter {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #eeeeee;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .pixie-ss-bar {
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixie-ss-slide {
+    transition: none !important;
+  }
+}
+
 /* Toast message for URL copied */
 .pixie-toast {
   position: fixed;

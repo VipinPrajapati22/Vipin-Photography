@@ -282,30 +282,273 @@
     }
   }
 
-  /* ─── SLIDESHOW ─── */
+  /* ─── DEDICATED SLIDESHOW OVERLAY ─── */
+  let ssOverlay = null;
+  let ssCurrentIndex = 0;
+  let ssIsPaused = false;
+  let ssInterval = null;
+  let ssHideBarTimer = null;
+  let ssCurrentImgEl = null;
+  let ssNextImgEl = null;
+
   function initSlideshowButton() {
     const slideBtn = document.querySelector('.pixie-slideshow-btn');
     if (!slideBtn) return;
 
     slideBtn.addEventListener('click', () => {
       if (!galleryItems.length) return;
-      openLightbox(0);
-      startSlideshow();
+      openSlideshow();
     });
   }
 
-  function startSlideshow() {
-    stopSlideshow();
-    slideshowTimer = setInterval(() => {
-      showNext();
+  function openSlideshow() {
+    if (ssOverlay) return;
+    ssCurrentIndex = 0;
+    ssIsPaused = false;
+
+    ssOverlay = document.createElement('div');
+    ssOverlay.className = 'pixie-slideshow-overlay';
+    ssOverlay.setAttribute('role', 'dialog');
+    ssOverlay.setAttribute('aria-modal', 'true');
+    ssOverlay.setAttribute('aria-label', 'Slideshow');
+
+    const stage = document.createElement('div');
+    stage.className = 'pixie-ss-stage';
+
+    ssCurrentImgEl = document.createElement('img');
+    ssCurrentImgEl.className = 'pixie-ss-slide active';
+    ssNextImgEl = document.createElement('img');
+    ssNextImgEl.className = 'pixie-ss-slide';
+
+    stage.appendChild(ssCurrentImgEl);
+    stage.appendChild(ssNextImgEl);
+    ssOverlay.appendChild(stage);
+
+    // Controls bar
+    const bar = document.createElement('div');
+    bar.className = 'pixie-ss-bar';
+    bar.innerHTML = `
+      <button type="button" class="pixie-ss-btn pixie-ss-prev" title="Previous (Left arrow)" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button type="button" class="pixie-ss-btn pixie-ss-playpause" title="Pause/Play (Space)" aria-label="Pause slideshow">
+        <svg class="ss-icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+        <svg class="ss-icon-play" viewBox="0 0 24 24" style="display:none;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </button>
+      <button type="button" class="pixie-ss-btn pixie-ss-next" title="Next (Right arrow)" aria-label="Next slide">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <span class="pixie-ss-counter"></span>
+      <button type="button" class="pixie-ss-btn pixie-ss-close" title="Close (Esc)" aria-label="Close slideshow">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    `;
+    ssOverlay.appendChild(bar);
+    document.body.appendChild(ssOverlay);
+    document.body.style.overflow = 'hidden';
+
+    // Enter fullscreen if allowed
+    try {
+      if (ssOverlay.requestFullscreen) {
+        ssOverlay.requestFullscreen().catch(() => {});
+      } else if (ssOverlay.webkitRequestFullscreen) {
+        ssOverlay.webkitRequestFullscreen().catch(() => {});
+      }
+    } catch (err) {
+      // Fallback: regular fixed overlay
+    }
+
+    // Set first slide
+    setSlideImage(ssCurrentImgEl, galleryItems[0]);
+    updateSsCounter();
+    preloadImage((1) % galleryItems.length);
+
+    // Event listeners on controls
+    bar.querySelector('.pixie-ss-prev').addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToPrevSlide();
+      resetSsTimer();
+    });
+    bar.querySelector('.pixie-ss-next').addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToNextSlide();
+      resetSsTimer();
+    });
+    bar.querySelector('.pixie-ss-playpause').addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSsPause();
+    });
+    bar.querySelector('.pixie-ss-close').addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeSlideshow();
+    });
+
+    // Auto-hide controls bar on inactivity
+    function pingControls() {
+      bar.classList.remove('hidden');
+      clearTimeout(ssHideBarTimer);
+      ssHideBarTimer = setTimeout(() => {
+        bar.classList.add('hidden');
+      }, 3000);
+    }
+    ssOverlay.addEventListener('mousemove', pingControls);
+    ssOverlay.addEventListener('click', pingControls);
+    pingControls();
+
+    // Keyboard controls
+    document.addEventListener('keydown', onSsKeyDown);
+
+    // Touch swipe support
+    let ssTouchX = 0;
+    ssOverlay.addEventListener('touchstart', (e) => {
+      ssTouchX = e.changedTouches[0].screenX;
+      pingControls();
+    }, { passive: true });
+
+    ssOverlay.addEventListener('touchend', (e) => {
+      const diff = e.changedTouches[0].screenX - ssTouchX;
+      if (Math.abs(diff) > 40) {
+        if (diff < 0) goToNextSlide();
+        else goToPrevSlide();
+        resetSsTimer();
+      }
+    }, { passive: true });
+
+    // Listen for fullscreen change
+    document.addEventListener('fullscreenchange', onSsFsChange);
+    document.addEventListener('webkitfullscreenchange', onSsFsChange);
+
+    startSsTimer();
+  }
+
+  function onSsFsChange() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      if (ssOverlay) {
+        closeSlideshow();
+      }
+    }
+  }
+
+  function onSsKeyDown(e) {
+    if (!ssOverlay) return;
+    if (e.key === 'Escape') {
+      closeSlideshow();
+    } else if (e.key === ' ' || e.code === 'Space') {
+      e.preventDefault();
+      toggleSsPause();
+    } else if (e.key === 'ArrowRight') {
+      goToNextSlide();
+      resetSsTimer();
+    } else if (e.key === 'ArrowLeft') {
+      goToPrevSlide();
+      resetSsTimer();
+    }
+  }
+
+  function setSlideImage(imgEl, item) {
+    if (!item) return;
+    imgEl.src = item.src;
+    imgEl.alt = item.alt || item.title || 'Macro Vipin Photography';
+  }
+
+  function crossfadeTo(newIndex) {
+    if (!ssOverlay || !galleryItems.length) return;
+    ssCurrentIndex = (newIndex + galleryItems.length) % galleryItems.length;
+
+    const item = galleryItems[ssCurrentIndex];
+    setSlideImage(ssNextImgEl, item);
+
+    ssNextImgEl.classList.add('active');
+    ssCurrentImgEl.classList.remove('active');
+
+    // Swap references
+    const temp = ssCurrentImgEl;
+    ssCurrentImgEl = ssNextImgEl;
+    ssNextImgEl = temp;
+
+    updateSsCounter();
+    preloadImage((ssCurrentIndex + 1) % galleryItems.length);
+  }
+
+  function goToNextSlide() {
+    crossfadeTo(ssCurrentIndex + 1);
+  }
+
+  function goToPrevSlide() {
+    crossfadeTo(ssCurrentIndex - 1);
+  }
+
+  function preloadImage(index) {
+    if (galleryItems[index]) {
+      const p = new Image();
+      p.src = galleryItems[index].src;
+    }
+  }
+
+  function updateSsCounter() {
+    if (!ssOverlay) return;
+    const counter = ssOverlay.querySelector('.pixie-ss-counter');
+    if (counter) {
+      counter.textContent = `${ssCurrentIndex + 1} / ${galleryItems.length}`;
+    }
+  }
+
+  function toggleSsPause() {
+    ssIsPaused = !ssIsPaused;
+    if (!ssOverlay) return;
+    const pauseIcon = ssOverlay.querySelector('.ss-icon-pause');
+    const playIcon = ssOverlay.querySelector('.ss-icon-play');
+    if (ssIsPaused) {
+      stopSsTimer();
+      if (pauseIcon) pauseIcon.style.display = 'none';
+      if (playIcon) playIcon.style.display = 'block';
+    } else {
+      if (pauseIcon) pauseIcon.style.display = 'block';
+      if (playIcon) playIcon.style.display = 'none';
+      startSsTimer();
+    }
+  }
+
+  function startSsTimer() {
+    stopSsTimer();
+    if (ssIsPaused) return;
+    ssInterval = setInterval(() => {
+      goToNextSlide();
     }, 4000);
   }
 
-  function stopSlideshow() {
-    if (slideshowTimer) {
-      clearInterval(slideshowTimer);
-      slideshowTimer = null;
+  function stopSsTimer() {
+    if (ssInterval) {
+      clearInterval(ssInterval);
+      ssInterval = null;
     }
+  }
+
+  function resetSsTimer() {
+    if (!ssIsPaused) {
+      startSsTimer();
+    }
+  }
+
+  function closeSlideshow() {
+    stopSsTimer();
+    clearTimeout(ssHideBarTimer);
+    document.removeEventListener('keydown', onSsKeyDown);
+    document.removeEventListener('fullscreenchange', onSsFsChange);
+    document.removeEventListener('webkitfullscreenchange', onSsFsChange);
+
+    try {
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
+      }
+    } catch (e) {}
+
+    if (ssOverlay && ssOverlay.parentNode) {
+      ssOverlay.parentNode.removeChild(ssOverlay);
+    }
+    ssOverlay = null;
+    document.body.style.overflow = '';
   }
 
 })();
