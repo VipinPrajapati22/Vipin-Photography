@@ -96,9 +96,16 @@ a {
 }
 
 .pixie-cover-brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.pixie-cover-brand:hover {
+  opacity: 0.7;
 }
 
 .pixie-cover-logo {
@@ -144,19 +151,81 @@ a {
   opacity: 0.88;
 }
 
-@media (max-width: 640px) {
-  .pixie-cover-brand-text {
-    display: none;
+@media (max-width: 700px) {
+  .pixie-cover {
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--px-bg-cover);
+    padding-bottom: 40px;
   }
+
   .pixie-cover-bar {
-    padding: 0 16px;
+    display: contents;
   }
-  .pixie-cover-title {
-    font-size: 13px;
+
+  .pixie-cover-brand {
+    order: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
+    gap: 8px;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
   }
-  .pixie-cover-btn {
-    padding: 8px 12px;
+
+  .pixie-cover-logo {
+    width: 22px;
+    height: 22px;
+  }
+
+  .pixie-cover-brand-text {
+    display: inline-block;
     font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .pixie-cover-media {
+    order: 2;
+    padding: 0;
+    margin: 0 16px;
+    aspect-ratio: 4 / 5;
+    flex: none;
+    overflow: hidden;
+  }
+
+  .pixie-cover-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .pixie-cover-title {
+    order: 3;
+    font-size: clamp(28px, 8vw, 34px);
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-top: 28px;
+    padding: 0 16px;
+    line-height: 1.15;
+  }
+
+  .pixie-cover-btn {
+    order: 4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 48px;
+    padding: 0;
+    margin: 28px auto 0 auto;
+    font-size: 12px;
+    letter-spacing: 0.14em;
   }
 }
 
@@ -178,6 +247,8 @@ a {
 .pixie-toolbar-left {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  flex: 1;
 }
 
 .pixie-toolbar-title {
@@ -187,6 +258,9 @@ a {
   text-transform: uppercase;
   color: var(--px-text);
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pixie-toolbar-sub {
@@ -201,6 +275,28 @@ a {
   display: flex;
   align-items: center;
   gap: 18px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .pixie-toolbar {
+    padding: 0 16px;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .pixie-toolbar-sub {
+    display: none;
+  }
+
+  .pixie-toolbar-right {
+    gap: 10px;
+  }
+
+  .pixie-slideshow-btn,
+  .pixie-theme-btn {
+    display: none;
+  }
 }
 
 .pixie-tool-btn {
@@ -282,6 +378,17 @@ a {
   color: var(--px-muted);
 }
 
+@media (max-width: 700px) {
+  .pixie-intro {
+    padding: 32px 20px;
+  }
+
+  .pixie-intro p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+}
+
 /* ─── 4. MASONRY PHOTO GRID ─── */
 .pixie-grid-wrap {
   padding: 0 10px 48px 10px;
@@ -301,9 +408,18 @@ a {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
+  .pixie-grid-wrap {
+    padding: 0 4px 48px 4px;
+  }
+
   .pixie-grid {
-    column-count: 1;
+    column-count: 2;
+    column-gap: 4px;
+  }
+
+  .pixie-item {
+    margin-bottom: 4px;
   }
 }
 
@@ -421,6 +537,36 @@ a {
   width: 32px;
   height: 32px;
   stroke: #ffffff;
+}
+
+@media (max-width: 700px) {
+  .pixie-lightbox-img {
+    max-width: 100vw;
+    max-height: 80vh;
+  }
+
+  .pixie-lb-btn {
+    padding: 8px;
+  }
+
+  .pixie-lb-prev svg,
+  .pixie-lb-next svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .pixie-lb-prev {
+    left: 8px;
+  }
+
+  .pixie-lb-next {
+    right: 8px;
+  }
+
+  .pixie-lb-close {
+    top: 14px;
+    right: 14px;
+  }
 }
 
 .pixie-lb-counter {
