@@ -208,9 +208,22 @@
       if (e.target === lb) closeLightbox();
     });
 
+    // Auto-hide controls after 3s of inactivity on desktop
+    let lbHideTimer = null;
+    function pingLbControls() {
+      lb.classList.remove('controls-hidden');
+      clearTimeout(lbHideTimer);
+      lbHideTimer = setTimeout(() => {
+        lb.classList.add('controls-hidden');
+      }, 3000);
+    }
+    lb.addEventListener('mousemove', pingLbControls);
+    lb.addEventListener('click', pingLbControls);
+
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (!lb.classList.contains('open')) return;
+      pingLbControls();
       if (e.key === 'Escape') closeLightbox();
       else if (e.key === 'ArrowRight') showNext();
       else if (e.key === 'ArrowLeft') showPrev();
@@ -238,6 +251,7 @@
 
     currentLbIndex = (index + galleryItems.length) % galleryItems.length;
     updateLightboxContent();
+    lb.classList.remove('controls-hidden');
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -246,6 +260,7 @@
     const lb = document.querySelector('.pixie-lightbox');
     if (!lb) return;
     lb.classList.remove('open');
+    lb.classList.remove('controls-hidden');
     document.body.style.overflow = '';
     stopSlideshow();
   }
