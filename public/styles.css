@@ -70,10 +70,10 @@
 
   --text: #171b14;
   --text-muted: #576150;
-  --text-dim: #7f8a76;
+  --text-dim: #48543f;
 
   --moss: #4a7234;
-  --moss-light: #5f8d43;
+  --moss-light: #3a5923;
   --moss-glow: rgba(74, 114, 52, 0.22);
 
   --amber: #b27a24;
@@ -660,14 +660,26 @@ p.lead {
 }
 
 .hero-dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: all var(--transition-fast);
   border: 0;
   padding: 0;
+  margin: 0 4px;
+}
+
+.hero-dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
 }
 
 .hero-dot.active {
@@ -1736,6 +1748,7 @@ p.lead {
   margin-top: 14px;
 }
 
+.footer-col h3,
 .footer-col h4 {
   font-family: var(--font-sans);
   font-size: 11px;
