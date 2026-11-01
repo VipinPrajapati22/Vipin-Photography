@@ -1,4 +1,4 @@
 
 git add .
-git commit -m "Add new photography works"
+git commit -m "NEW  "
 git push origin main
